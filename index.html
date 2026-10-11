@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Le matin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fond:#E4E9EE; --page:#F8FAFB; --encre:#16212D; --gris:#5A6877; --trait:#CBD3DC;
+  --l:33%; --s:45%;
+  --serif:"Spectral", Georgia, "Times New Roman", serif;
+  --sans:"Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --fond:#121920; --page:#1A232D; --encre:#E5EBF0; --gris:#96A4B2; --trait:#2C3845; --l:72%; --s:50%; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fond);color:var(--encre);font-family:var(--sans);font-size:16px;line-height:1.5;
+  padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.cadre{max-width:1500px;margin:0 auto;padding:2.5rem 1.25rem 4rem}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.3rem,6vw,3.8rem);line-height:1.05;margin:0;letter-spacing:-.01em}
+.consigne{color:var(--gris);margin:.7rem 0 0;max-width:52ch;font-size:1.05rem}
+.jauge{display:flex;gap:2px;margin:1.8rem 0 .6rem;height:10px}
+.jauge span{flex:1;border-radius:2px;background:var(--trait);transition:background .35s ease}
+.jauge span.lu{background:hsl(var(--h) var(--s) var(--l))}
+.etat{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem 1rem;font-size:.875rem;color:var(--gris)}
+button{font:inherit;color:inherit}
+.lien-btn{background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer;color:var(--gris)}
+.fin{display:none;font-family:var(--serif);font-style:italic;font-size:1.3rem;margin:1.4rem 0 0}
+.fin.visible{display:block}
+.colonnes{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1rem;margin-top:2.2rem;align-items:start}
+.rubrique{--c:hsl(var(--h) var(--s) var(--l));background:var(--page);border-top:4px solid var(--c);border-radius:0 0 6px 6px;padding:1rem 1.15rem .4rem}
+.rubrique header{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem}
+.rubrique h2{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin:0;color:var(--c)}
+.reste{font-size:.8rem;color:var(--gris);white-space:nowrap}
+.rubrique .sous{font-size:.85rem;color:var(--gris);margin:.1rem 0 .6rem}
+.rubrique .absentes{font-size:.78rem;color:var(--gris);margin:-.35rem 0 .6rem;font-style:italic}
+ol.articles{list-style:none;margin:0;padding:0}
+.article{display:grid;grid-template-columns:1fr auto;column-gap:.9rem;padding:.85rem 0 .9rem;border-top:1px solid var(--trait)}
+.article .meta{grid-column:1/-1;font-size:.8rem;color:var(--gris);margin-bottom:.15rem}
+.article .meta b{color:var(--c);font-weight:700}
+.article a{font-family:var(--serif);font-size:1.08rem;line-height:1.3;color:var(--encre);text-decoration:none}
+.article a:hover{text-decoration:underline;text-underline-offset:3px}
+.article p{grid-column:1;margin:.3rem 0 0;font-size:.88rem;color:var(--gris);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.coche{grid-column:2;grid-row:2 / span 2;align-self:start;width:26px;height:26px;margin-top:.1rem;border-radius:50%;
+  border:2px solid var(--c);background:transparent;cursor:pointer;display:grid;place-items:center;padding:0}
+.coche svg{width:14px;height:14px;opacity:0}
+.article.lu .coche{background:var(--c)}
+.article.lu .coche svg{opacity:1}
+.article.lu a,.article.lu p{opacity:.45}
+.vide{color:var(--gris);font-size:.9rem;padding:.9rem 0;border-top:1px solid var(--trait)}
+.erreur{background:var(--page);border-radius:6px;padding:1.2rem 1.3rem;margin-top:2rem;max-width:60ch}
+a:focus-visible,button:focus-visible{outline:2px solid var(--c, var(--encre));outline-offset:3px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){ .jauge span{transition:none} }
+</style>
+</head>
+<body>
+<div class="cadre">
+  <header>
+    <h1 id="date">Bonjour</h1>
+    <p class="consigne" id="consigne">Chargement des titres du matin.</p>
+    <div class="jauge" id="jauge" aria-hidden="true"></div>
+    <div class="etat">
+      <span id="compteur"></span>
+      <span><span id="maj"></span> <button class="lien-btn" id="recharger" type="button">Recharger</button></span>
+    </div>
+    <p class="fin" id="fin">Tu es à jour. Tu peux fermer l'onglet et filer en cours.</p>
+  </header>
+  <main class="colonnes" id="colonnes"></main>
+</div>
+
+<script>
+const CLE_LUS = "matin-lus-v1";
+const $ = s => document.querySelector(s);
+function lire(cle, defaut){ try { const v = localStorage.getItem(cle); return v ? JSON.parse(v) : defaut; } catch(e){ return defaut; } }
+function ecrire(cle, val){ try { localStorage.setItem(cle, JSON.stringify(val)); } catch(e){} }
+
+let lus = lire(CLE_LUS, {});
+(function nettoyer(){
+  const limite = Date.now() - 7 * 864e5;
+  for (const k in lus) if (lus[k] < limite) delete lus[k];
+  ecrire(CLE_LUS, lus);
+})();
+
+const heure = d => new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit" }).format(d).replace(":", " h ");
+function quand(d){
+  const min = Math.round((Date.now() - d.getTime()) / 6e4);
+  if (min < 1) return "à l'instant";
+  if (min < 60) return "il y a " + min + " min";
+  if (min < 12 * 60) return "il y a " + Math.round(min / 60) + " h";
+  const hier = new Date(); hier.setDate(hier.getDate() - 1);
+  if (d.toDateString() === new Date().toDateString()) return "aujourd'hui à " + heure(d);
+  if (d.toDateString() === hier.toDateString()) return "hier à " + heure(d);
+  return new Intl.DateTimeFormat("fr-FR", { weekday: "long" }).format(d) + " à " + heure(d);
+}
+const COCHE = '<svg viewBox="0 0 16 16" fill="none" stroke="var(--page)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>';
+
+let donnees = null;
+
+function rendre(){
+  const m = $("#colonnes");
+  m.innerHTML = "";
+  for (const r of donnees.rubriques) {
+    const s = document.createElement("section");
+    s.className = "rubrique";
+    s.style.setProperty("--h", r.teinte);
+    const tete = document.createElement("header");
+    const h2 = document.createElement("h2"); h2.textContent = r.nom;
+    const reste = document.createElement("span"); reste.className = "reste";
+    tete.append(h2, reste);
+    const sous = document.createElement("p"); sous.className = "sous"; sous.textContent = r.sous;
+    s.append(tete, sous);
+    if (r.sansReponse && r.sansReponse.length) {
+      const p = document.createElement("p"); p.className = "absentes";
+      p.textContent = "Sans réponse ce matin : " + r.sansReponse.join(", ") + ".";
+      s.append(p);
+    }
+    const ol = document.createElement("ol"); ol.className = "articles";
+    if (!r.articles.length) {
+      const li = document.createElement("li"); li.className = "vide";
+      li.textContent = "Aucun article récent dans cette rubrique.";
+      ol.append(li);
+    }
+    for (const it of r.articles) {
+      const li = document.createElement("li");
+      li.className = "article" + (lus[it.lien] ? " lu" : "");
+      const meta = document.createElement("div"); meta.className = "meta";
+      const b = document.createElement("b"); b.textContent = it.source;
+      meta.append(b, ", " + quand(new Date(it.date)));
+      const a = document.createElement("a");
+      a.href = it.lien; a.target = "_blank"; a.rel = "noopener"; a.textContent = it.titre;
+      const btn = document.createElement("button");
+      btn.type = "button"; btn.className = "coche"; btn.innerHTML = COCHE;
+      btn.setAttribute("aria-label", lus[it.lien] ? "Marquer comme non lu" : "Marquer comme lu");
+      a.addEventListener("click", () => marquer(it.lien, li, btn, true));
+      btn.addEventListener("click", () => marquer(it.lien, li, btn, !lus[it.lien]));
+      li.append(meta, a, btn);
+      if (it.resume && it.resume !== it.titre) { const p = document.createElement("p"); p.textContent = it.resume; li.append(p); }
+      ol.append(li);
+    }
+    s.append(ol);
+    r._reste = reste;
+    m.append(s);
+  }
+  majProgression();
+}
+
+function marquer(lien, li, btn, etat){
+  if (etat) lus[lien] = Date.now(); else delete lus[lien];
+  ecrire(CLE_LUS, lus);
+  li.classList.toggle("lu", etat);
+  btn.setAttribute("aria-label", etat ? "Marquer comme non lu" : "Marquer comme lu");
+  majProgression();
+}
+
+function majProgression(){
+  const j = $("#jauge"); j.innerHTML = "";
+  let total = 0, nbLus = 0;
+  for (const r of donnees.rubriques) {
+    let resteR = 0;
+    for (const it of r.articles) {
+      const seg = document.createElement("span");
+      seg.style.setProperty("--h", r.teinte);
+      if (lus[it.lien]) { seg.className = "lu"; nbLus++; } else resteR++;
+      j.append(seg); total++;
+    }
+    if (r._reste) r._reste.textContent = r.articles.length ? (resteR ? resteR + " à lire" : "lue") : "";
+  }
+  $("#consigne").textContent = total + " articles ce matin, répartis en " + donnees.rubriques.length + " rubriques. Une fois lus, tu fermes l'onglet.";
+  $("#compteur").textContent = nbLus + (nbLus > 1 ? " lus" : " lu") + " sur " + total;
+  $("#fin").classList.toggle("visible", total > 0 && nbLus === total);
+}
+
+function erreur(){
+  $("#consigne").textContent = "";
+  const local = location.protocol === "file:";
+  $("#colonnes").innerHTML = "";
+  const d = document.createElement("div"); d.className = "erreur";
+  d.textContent = local
+    ? "Cette page lit les titres préparés chaque heure sur GitHub. Ouvre-la depuis ton adresse GitHub Pages plutôt que depuis le fichier sur ton ordinateur."
+    : "Les titres n'ont pas pu être chargés. Recharge la page dans un instant. Si le problème continue, regarde l'onglet Actions de ton dépôt GitHub.";
+  $("#colonnes").append(d);
+}
+
+async function charger(){
+  try {
+    const r = await fetch("news.json?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw new Error(r.status);
+    donnees = await r.json();
+  } catch(e) { erreur(); return; }
+  const g = new Date(donnees.genere);
+  const ageH = (Date.now() - g) / 36e5;
+  $("#maj").textContent = "Titres préparés à " + heure(g) + (ageH > 3 ? ", il y a plus de 3 heures." : ".");
+  rendre();
+}
+
+const jour = new Intl.DateTimeFormat("fr-FR", { weekday: "long", day: "numeric", month: "long" }).format(new Date());
+$("#date").textContent = jour.charAt(0).toUpperCase() + jour.slice(1);
+document.title = "Le matin, " + jour;
+$("#recharger").addEventListener("click", charger);
+charger();
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{
+  "articlesParRubrique": 4,
+  "fraicheurHeures": 30,
+  "rubriques": [
+    { "id": "une", "nom": "À la une", "sous": "Ce qui fait l'actualité ce matin", "teinte": 205, "flux": [
+      { "nom": "Le Monde", "url": "https://www.lemonde.fr/rss/une.xml" },
+      { "nom": "franceinfo", "url": "https://www.francetvinfo.fr/titres.rss" },
+      { "nom": "BBC News", "url": "https://feeds.bbci.co.uk/news/rss.xml" },
+      { "nom": "The Guardian", "url": "https://www.theguardian.com/international/rss" },
+      { "nom": "France 24", "url": "https://www.france24.com/fr/rss" }
+    ]},
+    { "id": "france", "nom": "France", "sous": "Politique et société", "teinte": 230, "flux": [
+      { "nom": "Le Monde", "url": "https://www.lemonde.fr/politique/rss_full.xml" },
+      { "nom": "Le Monde", "url": "https://www.lemonde.fr/societe/rss_full.xml" },
+      { "nom": "franceinfo", "url": "https://www.francetvinfo.fr/france.rss" },
+      { "nom": "Libération", "url": "https://www.liberation.fr/arc/outboundfeeds/rss-all/?outputType=xml" },
+      { "nom": "France 24", "url": "https://www.france24.com/fr/france/rss" },
+      { "nom": "Le Figaro", "url": "https://www.lefigaro.fr/rss/figaro_politique.xml" }
+    ]},
+    { "id": "europe", "nom": "Europe", "sous": "Union européenne et pays voisins", "teinte": 258, "flux": [
+      { "nom": "Le Monde", "url": "https://www.lemonde.fr/europe/rss_full.xml" },
+      { "nom": "Politico Europe", "url": "https://www.politico.eu/feed/" },
+      { "nom": "Euractiv", "url": "https://www.euractiv.com/feed/" },
+      { "nom": "France 24", "url": "https://www.france24.com/fr/europe/rss" },
+      { "nom": "The Guardian", "url": "https://www.theguardian.com/world/europe-news/rss" }
+    ]},
+    { "id": "moyen-orient", "nom": "Moyen-Orient", "sous": "Proche et Moyen-Orient, Golfe", "teinte": 28, "flux": [
+      { "nom": "Le Monde", "url": "https://www.lemonde.fr/proche-orient/rss_full.xml" },
+      { "nom": "France 24", "url": "https://www.france24.com/fr/moyen-orient/rss" },
+      { "nom": "BBC News", "url": "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml" },
+      { "nom": "The Guardian", "url": "https://www.theguardian.com/world/middleeast/rss" }
+    ]},
+    { "id": "afrique", "nom": "Afrique", "sous": "Afrique du Nord et subsaharienne", "teinte": 85, "flux": [
+      { "nom": "Le Monde", "url": "https://www.lemonde.fr/afrique/rss_full.xml" },
+      { "nom": "RFI", "url": "https://www.rfi.fr/fr/afrique/rss" },
+      { "nom": "France 24", "url": "https://www.france24.com/fr/afrique/rss" },
+      { "nom": "BBC News", "url": "https://feeds.bbci.co.uk/news/world/africa/rss.xml" },
+      { "nom": "The Guardian", "url": "https://www.theguardian.com/world/africa/rss" }
+    ]},
+    { "id": "ameriques", "nom": "Amériques", "sous": "États-Unis, Canada, Amérique latine", "teinte": 345, "flux": [
+      { "nom": "Le Monde", "url": "https://www.lemonde.fr/ameriques/rss_full.xml" },
+      { "nom": "France 24", "url": "https://www.france24.com/fr/am%C3%A9riques/rss" },
+      { "nom": "BBC News", "url": "https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml" },
+      { "nom": "BBC News", "url": "https://feeds.bbci.co.uk/news/world/latin_america/rss.xml" },
+      { "nom": "The Guardian", "url": "https://www.theguardian.com/us-news/rss" }
+    ]},
+    { "id": "asie", "nom": "Asie-Pacifique", "sous": "Chine, Inde, Japon, Asie du Sud-Est, Océanie", "teinte": 178, "flux": [
+      { "nom": "Le Monde", "url": "https://www.lemonde.fr/asie-pacifique/rss_full.xml" },
+      { "nom": "France 24", "url": "https://www.france24.com/fr/asie-pacifique/rss" },
+      { "nom": "RFI", "url": "https://www.rfi.fr/fr/asie-pacifique/rss" },
+      { "nom": "BBC News", "url": "https://feeds.bbci.co.uk/news/world/asia/rss.xml" },
+      { "nom": "The Guardian", "url": "https://www.theguardian.com/world/asia-pacific/rss" }
+    ]},
+    { "id": "economie", "nom": "Économie", "sous": "Conjoncture, marchés, entreprises", "teinte": 140, "flux": [
+      { "nom": "Le Monde", "url": "https://www.lemonde.fr/economie/rss_full.xml" },
+      { "nom": "franceinfo", "url": "https://www.francetvinfo.fr/economie.rss" },
+      { "nom": "Les Echos", "url": "https://syndication.lesechos.fr/rss/rss_une.xml" },
+      { "nom": "BBC News", "url": "https://feeds.bbci.co.uk/news/business/rss.xml" },
+      { "nom": "The Guardian", "url": "https://www.theguardian.com/business/rss" }
+    ]},
+    { "id": "energie", "nom": "Énergie et climat", "sous": "Pétrole, gaz, électricité, transition", "teinte": 52, "flux": [
+      { "nom": "Le Monde", "url": "https://www.lemonde.fr/planete/rss_full.xml" },
+      { "nom": "The Guardian", "url": "https://www.theguardian.com/environment/energy/rss" },
+      { "nom": "Carbon Brief", "url": "https://www.carbonbrief.org/feed/" },
+      { "nom": "Reporterre", "url": "https://reporterre.net/spip.php?page=backend" },
+      { "nom": "OilPrice", "url": "https://oilprice.com/rss/main" }
+    ]},
+    { "id": "numerique", "nom": "Numérique et IA", "sous": "Tech, intelligence artificielle, régulation", "teinte": 300, "flux": [
+      { "nom": "Le Monde Pixels", "url": "https://www.lemonde.fr/pixels/rss_full.xml" },
+      { "nom": "Next", "url": "https://next.ink/feed/" },
+      { "nom": "Numerama", "url": "https://www.numerama.com/feed/" },
+      { "nom": "MIT Tech Review", "url": "https://www.technologyreview.com/feed/" },
+      { "nom": "The Verge", "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml" },
+      { "nom": "Euractiv", "url": "https://www.euractiv.com/sections/tech/feed/" }
+    ]}
+  ]
+}
